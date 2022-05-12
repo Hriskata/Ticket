@@ -2,46 +2,44 @@
 #define __HALL__
 
 #include <iostream>
+#include <string>
 #include <vector>
-
-// klas za zalite
-
 
 class Hall 
 {
-	int rows_of_hall=0; // parametur za kolko reda imam v zalata
-	int columns_of_hall=0; // parametur za kolko mesta imam na red
-	int** arr_of_seats=nullptr; // dvumeren masiv za mestata v zalata
-	
+	int rows_of_hall; // redove v zalata
+	int columns_of_hall; // mesta na red v zalata
+	int** arr_of_seats; // dvumeren masiv na zalata
+
 protected:
-	int number_of_hall = 0; // parametur za nomer na zala
-
-	// funciq dali veche sushtestvuva takava zala
-	bool NumberExist(int _number_of_hall);
-
+	std::string number_of_hall; // nomerut ili imeto na zalata
+	struct Hall_of_the_Show
+	{
+		std::string data;
+		std::string ShowsName;
+		int** copy_arr_of_seats = nullptr;
+	};
+	// problemut e che mi se suzdava vektor za vsqko show kakto beshe v nachaloto sus zalite
+	// sledovatelno ako go napravq klas koito mi e storage
+	std::vector<Hall_of_the_Show> Hall_info;
+	
 public:
-	// konstruktori, operator=, destruktor
+	// konstrukori  i destruktor
 	Hall();
-	Hall(int _number_of_hall,int _rows_of_hall, int _columns_of_hall); // chetem ot fail // nz kak
-	Hall(const Hall& other); 
-	Hall operator=(const Hall& other);
-	~Hall();
+	Hall(std::string _number_of_hall, int rows, int columns);
+	//~Hall();
 
-	// Geturi za nomer na zala i za mestata v zalata
-	int get_number_of_hall() const;
+	//geturi
+	std::string get_number_of_hall() const;
 	int get_arr_of_seats() const;
+	int get_rows_of_hall() const;
+	int get_columns_of_hall() const;
 
-	// operator<< CHECKNI GO za masiva dali trqbva
 	friend std::ostream& operator<<(std::ostream& os, const Hall& hall);
 
-	// Funkciq za svobodni mesta
-	int free_seats(); // vrushta masiv ot svobodni mesta
-
-	// pokazva koq zala kakvi harakteristiki ima
-	void print();
-
-	int get_capacity() const;
-	void add_number_in_arr_of_numbers(int _number_of_hall);
+	void print_hall_info();
+	
 };
-#endif 
+
+#endif // !__HALL__
 
