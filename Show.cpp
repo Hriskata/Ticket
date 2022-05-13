@@ -63,6 +63,6 @@ std::string Show::get_Show_date()
 
 std::ostream& operator<<(std::ostream& os, const Show& show)
 {
-	os << show;
+	os << show.date<<show.name<<show.number_of_hall;
 	return os;
 }
