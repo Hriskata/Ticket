@@ -1,31 +1,37 @@
 #ifndef __SHOW__
 #define __SHOW__
 
-#include "Storage_Halls.hpp"
-#include "Hall.hpp"
+#include "Hall.h"
 #include <string>
-#include <vector>
+#include <cstring>
 
-class Show : protected Storage_of_halls
-{
-	std::string number_of_hall;
-	std::string name;
+class Show : protected Hall
+{	
+	int rows;
+	int columns;
 	std::string date;
-
+	std::string name_of_show;
+	Hall hall;
+	int** seats = nullptr;
 	
 public:
-
-	Show() = default;
-	Show(std::string _date, std::string _name, std::string _number_of_hall,Storage_of_halls other);
+	Show();
+	Show(std::string _date, std::string _name_of_show,const Hall& _hall);
 	~Show();
-	//geturi
-	std::string get_Show_name();
-	std::string get_Show_date();
+	//geturi za promenlivite na show 
+	std::string Get_date() const;
+	std::string Get_name_of_show() const;
 
+	// geturi koito mi dostupvat neshtata na hall
+	std::string Get_hall_name() const; // vrushta mi imato na hall ot show
+	int Get_hall_row() const; // vrushta mi redovete na hall ot show 
+	int Get_hall_seat() const; // vrushta mi mestata na redovete na hall ot show
 
-	friend std::ostream& operator<<(std::ostream& os, const Show& show);
-	bool operator==(const Hall_of_the_Show& robj);
+	int Get_Free_Seats() const;
+
+	void Update_Seat(int _row,int _columns, std::string _pass, int _type_res);
+	int Get_Seat_Type(int _row, int _column);
+
 };
 
 #endif // !__SHOW__
-
