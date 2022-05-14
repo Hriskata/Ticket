@@ -2,44 +2,32 @@
 #define __HALL__
 
 #include <iostream>
-#include <string>
-#include <vector>
 
-class Hall 
+class Hall
 {
-	int rows_of_hall; // redove v zalata
-	int columns_of_hall; // mesta na red v zalata
-	int** arr_of_seats; // dvumeren masiv na zalata
-
 protected:
-	std::string number_of_hall; // nomerut ili imeto na zalata
-	struct Hall_of_the_Show
-	{
-		std::string data;
-		std::string ShowsName;
-		int** copy_arr_of_seats = nullptr;
-	};
-	// problemut e che mi se suzdava vektor za vsqko show kakto beshe v nachaloto sus zalite
-	// sledovatelno ako go napravq klas koito mi e storage
-	std::vector<Hall_of_the_Show> Hall_info;
-	
+	std::string name_of_hall;
+	int row_of_hall;
+	int seats_on_row;
+
 public:
-	// konstrukori  i destruktor
+	// konstruktor po podrazbirane, konstruktor, destruktor
 	Hall();
-	Hall(std::string _number_of_hall, int rows, int columns);
-	//~Hall();
+	Hall(std::string _name_of_hall, int _row_of_hall, int _seats_on_row);
 
-	//geturi
-	std::string get_number_of_hall() const;
-	int get_arr_of_seats() const;
-	int get_rows_of_hall() const;
-	int get_columns_of_hall() const;
+	// geturi
+	std::string Get_name_of_hall() const;
+	int Get_row_of_hall() const;
+	int Get_seats_on_row() const;
 
-	friend std::ostream& operator<<(std::ostream& os, const Hall& hall);
+	void Set_name_of_hall(std::string _name);
+	void Set_row_of_hall(int _row);
+	void Set_seats_on_row(int _seats);
+	// printira samata zala
+	void PrintHall() const;
 
-	void print_hall_info();
-	
+	// overload operator=
+	//Hall& operator=(const Hall& other);
 };
 
 #endif // !__HALL__
-
