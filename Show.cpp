@@ -1,68 +1,92 @@
-#include "Show.hpp"
+#include "Show.h"
 
-Show::Show(std::string _date, std::string _name, std::string _number_of_hall, Storage_of_halls _storage)
+
+Show::Show() : Hall()
 {
-	std::cout << "_storage.size_of_storage : ";
-	_storage.size_of_storage();
-	std::cout << std::endl;
-	for (size_t i = 0; i < _storage.get_size_of_storage(); i++)
-	{
-		std::cout << "_storage[i].get_number_of_hall : ";
-		std::cout << _storage[i].get_number_of_hall();
-		std::cout << std::endl;
-		std::cout << " _number of hall : " << _number_of_hall << std::endl;
-		if (_number_of_hall == _storage[i].get_number_of_hall())
-		{
-			
-			std::cout << "hello uspeshno vlizane v proverka edno" << std::endl;
-			std::cout <<"HALL_INFO SIZE :" << Hall_info.size() << std::endl;
+	date = '\0';
+	name_of_show = '\0';
+	rows = 0;
+	columns = 0;
+	seats = nullptr;
+	
+}
 
-			for (size_t j = 0; j < Hall_info.size(); j++)
-			{
-				if (_date == Hall_info[j].data)
-				{
-					throw std::exception("Already exist show on this date in this hall !");
-				}
-			}
-			number_of_hall = _number_of_hall;
-			name = _name;
-			date = _date;
-			
-			Hall_of_the_Show h;
-			h.data = _date;
-			h.ShowsName = _name;
-			int temp_rows = _storage[i].get_rows_of_hall();
-			int temp_columns = _storage[i].get_columns_of_hall();
-			h.copy_arr_of_seats = new int* [temp_rows];
-			for (size_t k = 0; k < temp_rows; k++) 
-			{
-				*h.copy_arr_of_seats = new int[temp_columns];
-			}
-			Hall_info.push_back(h);
-			std::cout << "HALL_INFO SIZE krai:" << Hall_info.size() << std::endl;
-			break;
+Show::Show(std::string _date, std::string _name_of_show, const Hall& _hall) : hall(hall)
+{
+	date = _date;
+	name_of_show = _name_of_show;
+	rows = hall.Get_row_of_hall();
+	columns = hall.Get_seats_on_row();
+	seats = new int*[rows];
+	for (size_t i = 0; i < rows; i++) 
+	{
+		seats[i] = new int[columns];
+		for (size_t j = 0; j < columns; j++)
+		{
+			seats[i][j] = 0;
 		}
 	}
-	
 }
 
 Show::~Show()
 {
-	
+	int rows = hall.Get_row_of_hall();
+	for (int i = 0; i < rows; i++)
+	{
+		delete seats[i];
+	}
+	delete[] seats;
 }
 
-std::string Show::get_Show_name()
-{
-	return name;
-}
 
-std::string Show::get_Show_date()
+std::string Show::Get_date() const
 {
 	return date;
 }
 
-std::ostream& operator<<(std::ostream& os, const Show& show)
+std::string Show::Get_name_of_show() const
 {
-	os << show.date<<show.name<<show.number_of_hall;
-	return os;
+	return name_of_show;
 }
+
+std::string Show::Get_hall_name() const
+{
+	return Get_name_of_hall();
+}
+
+int Show::Get_hall_row() const
+{
+	return Get_row_of_hall();
+}
+
+int Show::Get_hall_seat() const
+{
+	return Get_seats_on_row();
+}
+
+int Show::Get_Free_Seats() const
+{
+	int counter = 0;
+	for (int i = 0; i < hall.Get_row_of_hall(); i++)
+	{
+		for (int j = 0; j < hall.Get_seats_on_row(); j++)
+		{
+			if (seats[i][j] == 0)
+				counter++;
+		}
+	}
+	return counter;
+}
+
+void Show::Update_Seat(int _row, int _columns, std::string _pass, int _type_res)
+{
+	std::string pass = _pass;
+	int type_res = _type_res;
+	seats[_row][_columns] = type_res; // 0 - svobodno , 1 - zaeto , 2 - rezervirano
+}
+
+int Show::Get_Seat_Type(int _row, int _column)
+{
+	return seats[_row][_column];
+}
+
