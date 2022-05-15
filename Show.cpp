@@ -27,6 +27,26 @@ Show::Show(std::string _date, std::string _name_of_show, const Hall& _hall) : ha
 	}
 }
 
+Show::Show(const Show& other)
+{
+	if (this != &other)
+	{
+		rows = other.rows;
+		columns = other.columns;
+		date = other.date;
+		name_of_show = other.name_of_show;
+		//hall(other.hall);
+		for (size_t i = 0; i < rows; i++)
+		{
+			seats[i] = new int[columns];
+			for (size_t j = 0; j < columns; j++)
+			{
+				seats[i][j] = other.seats[i][j];
+			}
+		}
+	}
+}
+
 Show::~Show()
 {
 	int rows = hall.Get_row_of_hall();
