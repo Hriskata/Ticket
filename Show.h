@@ -2,8 +2,8 @@
 #define __SHOW__
 
 #include "Hall.h"
-#include <string>
-#include <cstring>
+#include <string> // ИЗПОЛЗВАМ ЧУЖДА БИБЛИОТЕКА - string
+#include <cstring> // ИЗПОЛЗВАМ ЧУЖДА БИБЛИОТЕКА - cstring
 
 class Show : protected Hall
 {	
@@ -15,23 +15,35 @@ class Show : protected Hall
 	int** seats = nullptr;
 	
 public:
+	// конструкто за подразбиране
 	Show();
+	// конструктор за създаване
 	Show(std::string _date, std::string _name_of_show,const Hall& _hall);
+	// деструктор
 	~Show();
-	//geturi za promenlivite na show 
+
+	// Селектори
+	// Селектор за датата на представлението
 	std::string Get_date() const;
+	// Селектор за името на представлението
 	std::string Get_name_of_show() const;
-
-	// geturi koito mi dostupvat neshtata na hall
-	std::string Get_hall_name() const; // vrushta mi imato na hall ot show
-	int Get_hall_row() const; // vrushta mi redovete na hall ot show 
-	int Get_hall_seat() const; // vrushta mi mestata na redovete na hall ot show
-
+	// Селектор за името на залата от клас представление
+	std::string Get_hall_name() const;
+	// Селектор за редовете на залата от клас представление
+	int Get_hall_row() const; 
+	// Селектор за местата на ред на залата от клас представление
+	int Get_hall_seat() const; 
+	// Селектор залата от клас представление
+	Hall Get_HALL() const;
+	// Селектор за местата в залата от клас представление
+	int Get_SEATS() const;
+	// Селектор за свободните места в залата от клас представление като бройка
 	int Get_Free_Seats() const;
-
-	void Update_Seat(int _row,int _columns, std::string _pass, int _type_res);
+	// Селектор за типа място по ред и място в залата от клас представление
 	int Get_Seat_Type(int _row, int _column);
 
+	// Функция, която ми променя типа на мястото (0 - свободно, 1 - купено, 2 - запазено), приема ред,място,парола,тип промяна на мястото 
+	void Update_Seat(int _row, int _columns, std::string _pass, int _type_res);
 };
 
 #endif // !__SHOW__
