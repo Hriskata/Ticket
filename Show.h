@@ -19,6 +19,8 @@ public:
 	Show();
 	// конструктор за създаване
 	Show(std::string _date, std::string _name_of_show,const Hall& _hall);
+	// копиращ конструкто
+	Show(const Show& other);
 	// деструктор
 	~Show();
 
