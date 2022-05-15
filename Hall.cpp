@@ -14,6 +14,15 @@ Hall::Hall(std::string _name_of_hall, int _row_of_hall, int _seats_on_row)
 	seats_on_row = _seats_on_row;
 }
 
+Hall::Hall(const Hall& other)
+{
+	if (this != &other) {
+		name_of_hall = other.name_of_hall;
+		row_of_hall = other.row_of_hall;
+		seats_on_row = other.seats_on_row;
+	}
+}
+
 std::string Hall::Get_name_of_hall() const
 {
 	return name_of_hall;
