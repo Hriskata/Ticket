@@ -50,16 +50,3 @@ void Hall::PrintHall() const
 	std::cout << "Rows : " << row_of_hall << std::endl;
 	std::cout << "Seats on row : " << seats_on_row << std::endl;
 }
-
-//Hall& Hall::operator=(const Hall& other)
-//{
-//	if (this != &other)
-//	{
-//		name_of_hall = other.name_of_hall;
-//		row_of_hall = other.row_of_hall;
-//		seats_on_row = other.seats_on_row;
-//	}
-//	return *this;
-//}
-
-
