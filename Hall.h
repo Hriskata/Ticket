@@ -13,7 +13,10 @@ protected:
 public:
 	// конструктори
 	Hall();
+	// конструктор за създаване
 	Hall(std::string _name_of_hall, int _row_of_hall, int _seats_on_row);
+	//конструктор за копиарне
+	Hall(const Hall& other);
 
 	// Селектори
 	// Селектор за името на залата от клас зала
