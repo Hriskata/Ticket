@@ -1,6 +1,5 @@
 #include "Show.h"
 
-
 Show::Show() : Hall()
 {
 	date = '\0';
@@ -38,7 +37,6 @@ Show::~Show()
 	delete[] seats;
 }
 
-
 std::string Show::Get_date() const
 {
 	return date;
@@ -62,6 +60,23 @@ int Show::Get_hall_row() const
 int Show::Get_hall_seat() const
 {
 	return Get_seats_on_row();
+}
+
+Hall Show::Get_HALL() const
+{
+	return hall;
+}
+
+int Show::Get_SEATS() const
+{
+	for (int i = 0; i < hall.Get_row_of_hall(); i++)
+	{
+		for (int j = 0; j < hall.Get_seats_on_row(); j++)
+		{
+			std::cout << seats[i][j];
+		}
+	}
+	return 0;
 }
 
 int Show::Get_Free_Seats() const
@@ -89,4 +104,3 @@ int Show::Get_Seat_Type(int _row, int _column)
 {
 	return seats[_row][_column];
 }
-
